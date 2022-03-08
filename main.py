@@ -1,5 +1,24 @@
+'''
+The bot performs the following actions based on the gamestate:
+Wait 20 seconds
+0. Find locations of key UI elements
+    - level, gold, stage, reroll button, xp button, augments, etc
+1. Find mercs phase
+    0. Search for early Merc units
+    1. Select Merc-centric augments
+    2. Stay strong
+2. Loss streak
+    0. Collect mercs but not two star
+    1. Collect champions that share Merc traits
+    2. Priority- econ
+    3. Stop at 40hp
+    4. Hold items
+3. Try to Cash
+    0. Two star all champions
+    1. Slam items
+    2. Level up
+'''
 from time import time
-
 import cv2 as cv
 import numpy as np
 import pyautogui
