@@ -23,20 +23,16 @@ class WindowCapture:
     offset_y = 0
 
     # constructor
-    def __init__(self, window_name=None):
+    def __init__(self, window_name):
         self.lock = Lock()
 
-        # find the handle for the window we want to capture.
-        # if no window name is given, capture the entire screen
-        if window_name is None:
-            self.hwnd = win32gui.GetDesktopWindow()
-        else:
+        # wait for window to appear
+        while not self.hwnd:
             self.hwnd = win32gui.FindWindow(None, window_name)
-            win32gui.SetForegroundWindow(self.hwnd)
-            if not self.hwnd:
-                raise Exception('Window not found: {}'.format(window_name))
 
-         # get the window size
+        win32gui.SetForegroundWindow(self.hwnd)
+
+        # get the window size
         window_rect = win32gui.GetWindowRect(self.hwnd)
         self.w = window_rect[2] - window_rect[0]
         self.h = window_rect[3] - window_rect[1]
@@ -53,6 +49,7 @@ class WindowCapture:
         # images into actual screen positions
         self.offset_x = window_rect[0] + self.cropped_x
         self.offset_y = window_rect[1] + self.cropped_y
+        
 
     def get_screenshot(self):
         x, y, x1, y1 = win32gui.GetClientRect(self.hwnd)
