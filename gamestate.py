@@ -28,10 +28,9 @@ class GameState:
     current_health = 100
 
     def __init__(self):
-        self.buy_xp_img = cv.imread('img/buy-xp.jpg')
-        self.buy_xp_button_loc = Detection.find_object(self.buy_xp_img, )
-
-        self.roll_button_img_path = cv.imread('img/roll.jpg')
+        '''
+        Set the location of UI elements
+        '''
 
     def update(self, screenshot):
         self.lock.acquire()
