@@ -1,4 +1,3 @@
-from multiprocessing import Array
 import cv2 as cv
 from threading import Lock, Thread
 from os import listdir
