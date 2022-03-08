@@ -1,0 +1,94 @@
+{
+    "champions":[
+        {"illaoi":{
+            "cost":1 ,
+            "preferred-items":[],
+            "position": "",
+            "shop-image":"",
+            "board-image":""
+        }
+        },
+        {"quinn":{
+            "cost":2 ,
+            "preferred-items":[],
+            "position": "",
+            "shop-image":"",
+            "board-image":""
+        }
+        },
+        {"gangplank":{
+            "cost":3 ,
+            "preferred-items":[],
+            "position": "",
+            "shop-image":"",
+            "board-image":""
+        }
+        },
+        {"missfortune":{
+            "cost":3 ,
+            "preferred-items":[],
+            "position": "",
+            "shop-image":"",
+            "board-image":""
+        }
+        },
+        {"tahmkench":{
+            "cost":5 ,
+            "preferred-items":[],
+            "position": "",
+            "shop-image":"",
+            "board-image":""
+        }
+        }
+    ],
+    "augment-priority":[
+        "Mercenary Soul",
+        "Twinshot Soul",
+        "The Golden Egg",
+        "Stand United III",
+        "Sniper Crown",
+        "Radiant Relics",
+        "New Recruit",
+        "Level Up!",
+        "High Five",
+        "High End Shopping",
+        "Golden Ticket",
+        "Golden Gifts II",
+        "Enforcer Soul",
+        "Disintegrator III",
+        "Celestial Blessing III",
+        "Challenger Crown",
+        "Bruiser Crown",
+        "Bruiser Crest",
+        "Celestial Blessing II",
+        "Challenger Crest",
+        "Component Grab Bag",
+        "Disintegrator II",
+        "Golden Gifts I",
+        "Gold Reserves",
+        "High Roller",
+        "Jeweled Lotus",
+        "Mercenary Crest",
+        "Metabolic Accelerator",
+        "Portable Forge",
+        "Sharpshooter",
+        "Sniper Crest",
+        "Stand United II",
+        "Thrill of the Hunt II",
+        "Trade Sector",
+        "Wise Spending",
+        "Backfoot I",
+        "Backfoot II",
+        "Backfoot III",
+        "Calculated Loss",
+        "Celestial Blessing I",
+        "Disintegrator I",
+        "Item Grab Bag I",
+        "Mercenary Heart",
+        "Pirates",
+        "Stand United I",
+        "Tri Force I",
+        "True Justice",
+        "Twinshot Heart"
+    ]
+}
