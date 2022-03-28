@@ -1,10 +1,7 @@
 import cv2 as cv
-import pyautogui
 from time import sleep, time
 from threading import Thread, Lock
 
-class BotState:
-    pass
 
 class TFTBot:
 
