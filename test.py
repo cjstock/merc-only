@@ -1,13 +1,22 @@
-import numpy as np
+from tkinter.tix import MAIN
+from detection import Detection
+from main import main
+from windowcapture import WindowCapture
+import state
+import gamestate
 
-matrix = [[1,2,3],[4,5,6],[7,8,9]]
+if __name__ == "__main__":
+    stage_num = None
+    wincap = WindowCapture()
+    detection = Detection()
+    tactician = state.Tactician()
+    gamecontext = gamestate.GameContext()
 
-output = []
+    
+    while True:
 
-state = 'right'
 
-while matrix:
-    if state == 'right':
-        output.append(*(matrix.pop(0)))
-
-print(output)
+        """
+        update screenshot
+        search for object
+        """

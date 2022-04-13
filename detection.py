@@ -20,7 +20,7 @@ class Detection:
             self.add(needle)
 
 
-    def bulk_action(self, targets=None, action='', arg=[]):
+    def action(self, targets=None, action='', args=[]):
         '''
         Description: Calls an action on a set of detectors defined by targets.
         targets (list of needle names)
@@ -30,8 +30,8 @@ class Detection:
             targets = self.needles
         for t in targets:
             d = self.detectors.get(t)
-            if len(arg) != 0:
-                getattr(d, action)(arg)
+            if len(args) > 0:
+                getattr(d, action)(args)
             else:
                 getattr(d, action)()
 
@@ -63,7 +63,6 @@ class Detector:
 
 
     def find_object(self, haystack_img, threshold=0.8, use_method='minMaxLoc'):
-        rectangles = []
 
         result = cv.matchTemplate(haystack_img, self.needle_img, method=cv.TM_CCOEFF_NORMED)
 
@@ -71,12 +70,10 @@ class Detector:
             min_val, max_val, min_loc, max_loc = cv.minMaxLoc(result)
             if max_val >= threshold:
                 top_left = max_loc
-                rectangles.append((*top_left, self.needle_w, self.needle_h))
+                self.rectangles.append((*top_left, self.needle_w, self.needle_h))
         
-        return rectangles
 
     def get_click_points(self):
-        points = []
 
         # Loop over all the rectangles
         for (x, y, w, h) in self.rectangles:
@@ -84,9 +81,8 @@ class Detector:
             center_x = x + int(w/2)
             center_y = y + int(h/2)
             # Save the points
-            points.append((center_x, center_y))
+            self.points.append((center_x, center_y))
 
-        return points
 
     def update(self, screenshot):
         self.lock.acquire()

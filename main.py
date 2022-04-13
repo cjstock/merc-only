@@ -18,7 +18,9 @@ Wait 20 seconds
     1. Slam items
     2. Level up
 '''
-from time import time
+from enum import Enum
+from os import stat
+from time import sleep, time
 import cv2 as cv
 import numpy as np
 import pyautogui
@@ -27,25 +29,57 @@ from vision import Vision
 from windowcapture import WindowCapture
 from detection import Detection, Detector
 
+
+class State(Enum):
+    STOPPED = 1,
+    INITIALIZING = 2,
+    WAITING = 3,
+    ROLLING = 4,
+    DONE = 5
+
 def main():
-    # initialize the WindowCapture class
+    print('Starting...')
     wincap = WindowCapture('League of Legends (TM) Client')
+    print('Found Window')
     detection = Detection()
+    print('Setup Detection')
     vision = Vision()
 
     DEBUG = True
 
 
     wincap.start()
-    detection.bulk_action(action='start')
+    print('Started capturing')
+    start_time = time()
+
+    state = State.INITIALIZING
+    detection.action(targets=['round-12'], action='start')
+    detection.action(targets=['round-12'], action='update', args=wincap.screenshot)
+    detection.action(targets=['round-12'], action='run')
 
     while(True):
+        print(state.name)
 
-        if wincap.screenshot is None:
-            continue
+        if state == State.INITIALIZING:
+            detection.action(targets=['round-12'], action='update', args=wincap.screenshot)
+            p = detection.detectors['round-12'].points
+            if p:
+                pyautogui.moveTo(p)
+                state = State.WAITING
+                sleep(5)
 
-        detection.bulk_action(action='update', arg=wincap.screenshot)
-        detection.bulk_action(action='get_click_points')
+        if state == State.WAITING:
+            if time() - start_time >= 15:
+                continue
+        
+        if state == State.DONE:
+            detection.bulk_action(action='stop')
+            wincap.stop()
+            cv.destroyAllWindows()
+            break
+
+        #detection.bulk_action(action='update', arg=wincap.screenshot)
+        #detection.bulk_action(action='get_click_points')
 
 
         if DEBUG:
@@ -54,13 +88,6 @@ def main():
                 debug_img = vision.draw_rectangles(wincap.screenshot, d.rectangles)
             cv.imshow('Matches', debug_img)
 
-        # press 'q' with the output window focused to exit.
-        # waits 1 ms every loop to process key presses
-        if cv.waitKey(1) == ord('q'):
-            detection.bulk_action(action='stop')
-            wincap.stop()
-            cv.destroyAllWindows()
-            break
 
     print('Done.')
 main()
